@@ -14,7 +14,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className="antialiased bg-[#00003c] text-white">
         {/* Header */}
-        <header className="flex justify-between items-center px-6 py-4 bg-[#54F4D0] text-[#00003c]">
+        <header className="flex justify-between items-center px-6 py-4 bg-[#1ED2AF] text-[#00003c]">
           <h1 className="font-bold">Cinema Guru</h1>
           <div className="flex items-center space-x-4">
             <span>Welcome, user@email.com</span>
@@ -22,10 +22,10 @@ export default function RootLayout({ children }: Props) {
           </div>
         </header>
 
-        {/* Layout container */}
-        <div className="flex">
+        {/* Full viewport container */}
+        <div className="flex h-screen">
           {/* Sidebar navigation */}
-          <nav className="w-48 h-screen bg-[#1DD2AF] text-white p-6 space-y-4">
+          <nav className="w-48 bg-[#1DD2AF] text-white p-6 space-y-4">
             <a href="#" className="block font-semibold hover:underline">
               Home
             </a>
@@ -38,7 +38,7 @@ export default function RootLayout({ children }: Props) {
           </nav>
 
           {/* Main content area */}
-          <main className="flex-1 p-6">{children}</main>
+          <main className="flex-1 p-6 overflow-auto">{children}</main>
         </div>
       </body>
     </html>
