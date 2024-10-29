@@ -18,7 +18,7 @@ export default function RootLayout({ children }: Props) {
           <h1 className="font-bold">Cinema Guru</h1>
           <div className="flex items-center space-x-4">
             <span>Welcome, user@email.com</span>
-            <button className="font-semibold hover:underline">Logout</button>
+            <button className="font-semibold">Logout</button>
           </div>
         </header>
 
@@ -26,13 +26,13 @@ export default function RootLayout({ children }: Props) {
         <div className="flex h-screen">
           {/* Sidebar navigation */}
           <nav className="w-48 bg-[#1DD2AF] text-white p-6 space-y-4">
-            <a href="#" className="block font-semibold hover:underline">
+            <a href="#" className="block font-semibold">
               Home
             </a>
-            <a href="#" className="block font-semibold hover:underline">
+            <a href="#" className="block font-semibold">
               Favorites
             </a>
-            <a href="#" className="block font-semibold hover:underline">
+            <a href="#" className="block font-semibold">
               Watch Later
             </a>
           </nav>
