@@ -1,5 +1,6 @@
 import "@/app/global.css";
 import { Metadata } from "next";
+import { homeOutline, starOutline, timeOutline } from "ionicons/icons";
 
 export const metadata: Metadata = {
   title: "Cinema Guru | Atlas School",
@@ -26,14 +27,17 @@ export default function RootLayout({ children }: Props) {
         <div className="flex h-screen">
           {/* Sidebar navigation */}
           <nav className="w-48 bg-[#1DD2AF] text-white p-6 space-y-4">
-            <a href="#" className="block font-semibold">
-              Home
+            <a href="#" className="flex items-center space-x-2 font-semibold">
+              <svg className="w-5 h-5" dangerouslySetInnerHTML={{ __html: homeOutline }} />
+              <span>Home</span>
             </a>
-            <a href="#" className="block font-semibold">
-              Favorites
+            <a href="#" className="flex items-center space-x-2 font-semibold">
+              <svg className="w-5 h-5" dangerouslySetInnerHTML={{ __html: starOutline }} />
+              <span>Favorites</span>
             </a>
-            <a href="#" className="block font-semibold">
-              Watch Later
+            <a href="#" className="flex items-center space-x-2 font-semibold">
+              <svg className="w-5 h-5" dangerouslySetInnerHTML={{ __html: timeOutline }} />
+              <span>Watch Later</span>
             </a>
           </nav>
 
