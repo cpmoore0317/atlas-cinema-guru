@@ -1,6 +1,11 @@
 import "@/app/global.css";
 import { Metadata } from "next";
-import { homeOutline, starOutline, timeOutline, filmOutline } from "ionicons/icons";
+import {
+  homeOutline,
+  starOutline,
+  time,
+  film,
+} from "ionicons/icons";
 
 export const metadata: Metadata = {
   title: "Cinema Guru | Atlas School",
@@ -17,7 +22,13 @@ export default function RootLayout({ children }: Props) {
         {/* Header */}
         <header className="flex justify-between items-center px-6 py-4 bg-[#54F4D0] text-[#00003c]">
           <div className="flex items-center space-x-2">
-            <svg className="w-6 h-6" dangerouslySetInnerHTML={{ __html: filmOutline }} />
+            <svg
+              className="w-6 h-6 text-[#00003c]"
+              dangerouslySetInnerHTML={{
+                __html: film.replace("<svg", '<svg fill="currentColor"'),
+              }}
+            />
+
             <h1 className="font-bold">Cinema Guru</h1>
           </div>
           <div className="flex items-center space-x-4">
@@ -31,15 +42,30 @@ export default function RootLayout({ children }: Props) {
           {/* Sidebar navigation */}
           <nav className="w-48 bg-[#1DD2AF] text-white p-6 space-y-4">
             <a href="#" className="flex items-center space-x-2 font-semibold">
-              <svg className="w-5 h-5" dangerouslySetInnerHTML={{ __html: homeOutline }} />
+            <svg
+              className="w-6 h-6 text-[#ffffff]"
+              dangerouslySetInnerHTML={{
+                __html: homeOutline.replace("<svg", '<svg fill="currentColor"'),
+              }}
+            />
               <span>Home</span>
             </a>
             <a href="#" className="flex items-center space-x-2 font-semibold">
-              <svg className="w-5 h-5" dangerouslySetInnerHTML={{ __html: starOutline }} />
+            <svg
+              className="w-6 h-6 text-[#ffffff]"
+              dangerouslySetInnerHTML={{
+                __html: starOutline.replace("<svg", '<svg fill="currentColor"'),
+              }}
+            />
               <span>Favorites</span>
             </a>
             <a href="#" className="flex items-center space-x-2 font-semibold">
-              <svg className="w-5 h-5" dangerouslySetInnerHTML={{ __html: timeOutline }} />
+            <svg
+              className="w-6 h-6 text-[#ffffff]"
+              dangerouslySetInnerHTML={{
+                __html: time.replace("<svg", '<svg fill="currentColor"'),
+              }}
+            />
               <span>Watch Later</span>
             </a>
           </nav>
