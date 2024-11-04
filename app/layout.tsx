@@ -5,6 +5,7 @@ import {
   starOutline,
   time,
   film,
+  exit,
 } from "ionicons/icons";
 
 export const metadata: Metadata = {
@@ -32,7 +33,13 @@ export default function RootLayout({ children }: Props) {
             <h1 className="font-bold">Cinema Guru</h1>
           </div>
           <div className="flex items-center space-x-4">
-            <span>Welcome, user@email.com</span>
+            <span className="mr-4">Welcome, user@email.com</span>
+            <svg
+              className="w-6 h-6 text-[#00003c]"
+              dangerouslySetInnerHTML={{
+                __html: exit.replace("<svg", '<svg fill="currentColor"'),
+              }}
+            />
             <button className="font-semibold">Logout</button>
           </div>
         </header>
