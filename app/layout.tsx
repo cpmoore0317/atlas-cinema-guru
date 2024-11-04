@@ -1,6 +1,6 @@
 import "@/app/global.css";
 import { Metadata } from "next";
-import { homeOutline, starOutline, timeOutline } from "ionicons/icons";
+import { homeOutline, starOutline, timeOutline, filmOutline } from "ionicons/icons";
 
 export const metadata: Metadata = {
   title: "Cinema Guru | Atlas School",
@@ -16,7 +16,10 @@ export default function RootLayout({ children }: Props) {
       <body className="antialiased bg-[#00003c] text-white">
         {/* Header */}
         <header className="flex justify-between items-center px-6 py-4 bg-[#54F4D0] text-[#00003c]">
-          <h1 className="font-bold">Cinema Guru</h1>
+          <div className="flex items-center space-x-2">
+            <svg className="w-6 h-6" dangerouslySetInnerHTML={{ __html: filmOutline }} />
+            <h1 className="font-bold">Cinema Guru</h1>
+          </div>
           <div className="flex items-center space-x-4">
             <span>Welcome, user@email.com</span>
             <button className="font-semibold">Logout</button>
