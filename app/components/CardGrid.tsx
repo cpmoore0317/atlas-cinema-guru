@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import { Card } from './Card';
+import { useEffect, useState } from "react";
+import { Card } from "./Card";
 
 interface Movie {
   id: string;
@@ -20,17 +20,36 @@ interface MovieGridProps {
   query?: string;
 }
 
-export const MovieGrid: React.FC<MovieGridProps> = ({ currentPage, selectedGenres, updateTotalPages, minYear, maxYear, query }) => {
+export const MovieGrid: React.FC<MovieGridProps> = ({
+  currentPage,
+  selectedGenres,
+  updateTotalPages,
+  minYear,
+  maxYear,
+  query,
+}) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchMovies = async (page: number, genres: string[], minYear?: string, maxYear?: string, query?: string) => {
+    const fetchMovies = async (
+      page: number,
+      genres: string[],
+      minYear?: string,
+      maxYear?: string,
+      query?: string
+    ) => {
       try {
-        const genreQuery = genres.length > 0 ? `&genres=${encodeURIComponent(genres.join(","))}` : "";
-        const yearQuery = (minYear || maxYear) ? `&minYear=${minYear}&maxYear=${maxYear}` : "";
+        const genreQuery =
+          genres.length > 0
+            ? `&genres=${encodeURIComponent(genres.join(","))}`
+            : "";
+        const yearQuery =
+          minYear || maxYear ? `&minYear=${minYear}&maxYear=${maxYear}` : "";
         const queryParam = query ? `&query=${encodeURIComponent(query)}` : "";
-        const res = await fetch(`/api/titles?page=${page}${genreQuery}${yearQuery}${queryParam}`);
+        const res = await fetch(
+          `/api/titles?page=${page}${genreQuery}${yearQuery}${queryParam}`
+        );
         const data = await res.json();
 
         setMovies(data.titles || []);
@@ -49,7 +68,9 @@ export const MovieGrid: React.FC<MovieGridProps> = ({ currentPage, selectedGenre
     <div className="px-10 py-3">
       {error && <p className="text-red-500">{error}</p>}
       <div className="flex justify-center">
-        <div className="grid grid-cols-3 gap-x-40 gap-y-2"> {/* Add gap for spacing between cards */}
+        <div className="grid grid-cols-3 gap-x-40 gap-y-2">
+          {" "}
+          {/* Add gap for spacing between cards */}
           {movies.map((movie) => (
             <div key={movie.id}>
               <Card movie={movie} />
