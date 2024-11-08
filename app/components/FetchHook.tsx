@@ -12,18 +12,31 @@ type FetchTitlesProps = {
   maxYear?: string;
 };
 
-export default function FetchTitles({ query = "", currentPage = 1, selectedGenres, updateTotalPages, minYear, maxYear }: FetchTitlesProps) {
+export default function FetchTitles({
+  query = "",
+  currentPage = 1,
+  selectedGenres,
+  updateTotalPages,
+  minYear,
+  maxYear,
+}: FetchTitlesProps) {
   const { data: session, status } = useSession();
 
   useEffect(() => {
     if (!session || status !== "authenticated") {
       return;
-    };
+    }
 
     const fetchTitles = async () => {
-      const genreQuery = selectedGenres.length > 0 ? `&genres=${encodeURIComponent(selectedGenres.join(","))}` : "";
-      const yearQuery = (minYear || maxYear) ? `&minYear=${minYear}&maxYear=${maxYear}` : "";
-      const url = `/api/titles?query=${encodeURIComponent(query)}&page=${currentPage}${genreQuery}${yearQuery}`;
+      const genreQuery =
+        selectedGenres.length > 0
+          ? `&genres=${encodeURIComponent(selectedGenres.join(","))}`
+          : "";
+      const yearQuery =
+        minYear || maxYear ? `&minYear=${minYear}&maxYear=${maxYear}` : "";
+      const url = `/api/titles?query=${encodeURIComponent(
+        query
+      )}&page=${currentPage}${genreQuery}${yearQuery}`;
 
       try {
         const response = await fetch(url);
@@ -35,7 +48,16 @@ export default function FetchTitles({ query = "", currentPage = 1, selectedGenre
     };
 
     fetchTitles();
-  }, [query, currentPage, selectedGenres, minYear, maxYear, updateTotalPages, session, status]);
+  }, [
+    query,
+    currentPage,
+    selectedGenres,
+    minYear,
+    maxYear,
+    updateTotalPages,
+    session,
+    status,
+  ]);
 
   return null;
 }
