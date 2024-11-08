@@ -11,7 +11,5 @@ export default function SearchHandler({ onSearch }: SearchHandlerProps) {
     onSearch(query);
   };
 
-  return (
-    <SearchBar onSearch={handleSearch} />
-  );
+  return <SearchBar onSearch={handleSearch} />;
 }

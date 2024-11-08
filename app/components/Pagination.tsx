@@ -1,11 +1,19 @@
-'use client';
+"use client";
 
-export const Pagination = ({ currentPage, totalPages, onPageChange }: { currentPage: number, totalPages: number | undefined, onPageChange: (page: number) => void }) => {
+export const Pagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number | undefined;
+  onPageChange: (page: number) => void;
+}) => {
   const isPrevDisabled = currentPage === 1;
   const totalPagesSafe = totalPages || 1;
   const isNextDisabled = currentPage >= totalPagesSafe || totalPagesSafe <= 1;
 
-  const handlePrev= () => {
+  const handlePrev = () => {
     if (currentPage > 1) {
       onPageChange(currentPage - 1);
     }
@@ -13,11 +21,13 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: { currentP
 
   const handleNext = () => {
     if (totalPagesSafe > 1 && currentPage < totalPagesSafe) {
-        onPageChange(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
-  console.log(`Current Page: ${currentPage}, Total Pages: ${totalPages}, Is Next Disabled: ${isNextDisabled}`);
+  console.log(
+    `Current Page: ${currentPage}, Total Pages: ${totalPages}, Is Next Disabled: ${isNextDisabled}`
+  );
 
   return (
     <div className="flex items-center justify-center gap-1 my-5 py-5">
@@ -26,7 +36,9 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: { currentP
         onClick={handlePrev}
         disabled={isPrevDisabled}
         className={`px-5 py-3 w-28 text-darkBlue bg-Teal transition-opacity duration-300 rounded-l-full 
-        ${isPrevDisabled ? 'opacity-20 cursor-not-allowed' : 'hover:opacity-80'}`}
+        ${
+          isPrevDisabled ? "opacity-20 cursor-not-allowed" : "hover:opacity-80"
+        }`}
       >
         Previous
       </button>
@@ -36,7 +48,9 @@ export const Pagination = ({ currentPage, totalPages, onPageChange }: { currentP
         onClick={handleNext}
         disabled={isNextDisabled}
         className={`px-5 py-3 w-28 text-darkBlue bg-Teal transition-opacity duration-300 rounded-r-full 
-        ${isNextDisabled ? 'opacity-20 cursor-not-allowed' : 'hover:opacity-80'}`}
+        ${
+          isNextDisabled ? "opacity-20 cursor-not-allowed" : "hover:opacity-80"
+        }`}
       >
         Next
       </button>
