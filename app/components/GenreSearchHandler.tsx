@@ -7,7 +7,9 @@ interface GenreSearchHandlerProps {
   onGenreSelect: (genres: string[]) => void;
 }
 
-export default function GenreSearchHandler({ onGenreSelect }: GenreSearchHandlerProps) {
+export default function GenreSearchHandler({
+  onGenreSelect,
+}: GenreSearchHandlerProps) {
   const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
   const handleGenreSelect = async (genres: string[]) => {
@@ -15,7 +17,9 @@ export default function GenreSearchHandler({ onGenreSelect }: GenreSearchHandler
     onGenreSelect(genres);
     try {
       const genreQuery = genres.join(",");
-      const response = await fetch(`/api/titles?genres=${encodeURIComponent(genreQuery)}`);
+      const response = await fetch(
+        `/api/titles?genres=${encodeURIComponent(genreQuery)}`
+      );
       const data = await response.json();
       console.log("Fetched data:", data);
     } catch (error) {
@@ -23,7 +27,5 @@ export default function GenreSearchHandler({ onGenreSelect }: GenreSearchHandler
     }
   };
 
-  return (
-    <GenreButtons onGenreSelect={handleGenreSelect} />
-  );
+  return <GenreButtons onGenreSelect={handleGenreSelect} />;
 }
