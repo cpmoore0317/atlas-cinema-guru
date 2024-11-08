@@ -29,7 +29,7 @@ export default function YearButtons({ onSearch }: YearProps) {
         <h1 className="mb-2">Min Year</h1>
         <input
           type="text"
-          placeholder="1999"
+          placeholder="2015"
           value={minYear}
           onChange={handleMinYear}
           className="text-center w-32 p-2 rounded-full border-2 border-Teal text-white bg-transparent"
@@ -39,7 +39,7 @@ export default function YearButtons({ onSearch }: YearProps) {
         <h1 className="mb-2">Max Year</h1>
         <input
           type="text"
-          placeholder="2024"
+          placeholder="2023"
           value={maxYear}
           onChange={handleMaxYear}
           className="text-center w-32 p-2 rounded-full border-2 border-Teal text-white bg-transparent"
