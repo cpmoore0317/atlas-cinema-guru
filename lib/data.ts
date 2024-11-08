@@ -32,6 +32,18 @@ export async function fetchTitles(
         .execute()
     ).map((row) => row.title_id);
 
+    const totalCount = await db
+      .selectFrom("titles")
+      .selectAll()
+      .where("released", ">=", minYear)
+      .where("released", "<=", maxYear)
+      .where("title", "ilike", `%${query}%`)
+      .where("genre", "in", genres)
+      .execute()
+      .then(rows => {
+        return rows.length;
+      });
+
     //Fetch titles
     const titles = await db
       .selectFrom("titles")
@@ -43,14 +55,22 @@ export async function fetchTitles(
       .orderBy("titles.title", "asc")
       .limit(6)
       .offset((page - 1) * 6)
-      .execute();
+      .execute()
+      .then(titles => {
+        return titles;
+      });
 
-    return titles.map((row) => ({
+    const formattedTitles = titles.map((row) => ({
       ...row,
-      favorited: favorites.includes(row.id),
-      watchLater: watchLater.includes(row.id),
+      // favorited: favorites.includes(row.id),
+      // watchLater: watchLater.includes(row.id),
       image: `/images/${row.id}.webp`,
     }));
+
+    const totalPages = Math.ceil(totalCount / 6);
+
+    return { titles: formattedTitles, totalPages };
+
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch topics.");
@@ -62,6 +82,13 @@ export async function fetchTitles(
  */
 export async function fetchFavorites(page: number, userEmail: string) {
   try {
+    const totalCount = await db
+      .selectFrom("favorites")
+      .select("title_id")
+      .where("user_id", "=", userEmail)
+      .execute()
+      .then(rows => rows.length);
+
     const watchLater = (
       await db
         .selectFrom("watchlater")
@@ -80,12 +107,18 @@ export async function fetchFavorites(page: number, userEmail: string) {
       .offset((page - 1) * 6)
       .execute();
 
-    return titles.map((row) => ({
-      ...row,
-      favorited: true,
-      watchLater: watchLater.includes(row.id),
-      image: `/images/${row.id}.webp`,
-    }));
+    const totalPages = Math.ceil(totalCount / 6);
+
+    return {
+      titles: titles.map((row) => ({
+        ...row,
+        favorited: true,
+        watchLater: watchLater.includes(row.id),
+        image: `/images/${row.id}.webp`,
+      })),
+      totalPages,
+    };
+
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch favorites.");
@@ -148,6 +181,12 @@ export async function fetchWatchLaters(page: number, userEmail: string) {
         .execute()
     ).map((row) => row.title_id);
 
+    const totalCount = await db
+      .selectFrom("watchlater")
+      .where("user_id", "=", userEmail)
+      .execute()
+      .then(rows => rows.length);
+
     const titles = await db
       .selectFrom("titles")
       .selectAll("titles")
@@ -158,12 +197,17 @@ export async function fetchWatchLaters(page: number, userEmail: string) {
       .offset((page - 1) * 6)
       .execute();
 
-    return titles.map((row) => ({
-      ...row,
-      favorited: favorites.includes(row.id),
-      watchLater: true,
-      image: `/images/${row.id}.webp`,
-    }));
+    const totalPages = Math.ceil(totalCount / 6);
+
+    return {
+      titles: titles.map((row) => ({
+        ...row,
+        favorited: favorites.includes(row.id),
+        watchLater: true,
+        image: `/images/${row.id}.webp`,
+      })),
+      totalPages: totalPages,
+    };
   } catch (error) {
     console.error("Database Error:", error);
     throw new Error("Failed to fetch watchLater.");
