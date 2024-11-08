@@ -1,4 +1,4 @@
-import { Card } from './Card';
+import { Card } from "./Card";
 
 interface Movie {
   id: string;
@@ -17,8 +17,12 @@ interface MovieGridProps {
   type: "favorites" | "watchLater";
 }
 
-export const FavoriteGrid: React.FC<MovieGridProps> = ({ currentPage, updateTotalPages, movies = [], type }) => {
-
+export const FavoriteGrid: React.FC<MovieGridProps> = ({
+  currentPage,
+  updateTotalPages,
+  movies = [],
+  type,
+}) => {
   return (
     <div className="px-10 py-3">
       <div className="flex justify-center">
