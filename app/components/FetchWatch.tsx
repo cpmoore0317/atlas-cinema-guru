@@ -32,13 +32,18 @@ export default function FetchWatch({
         if (response.ok) {
           console.log("Fetched watch-later:", data);
           const watchLaterData = data.watchLater || {};
-          const titlesArray = Array.isArray(watchLaterData.titles) ? watchLaterData.titles : [];
+          const titlesArray = Array.isArray(watchLaterData.titles)
+            ? watchLaterData.titles
+            : [];
           setWatch(titlesArray);
 
           const totalPages = watchLaterData.totalPages || 1;
           updateTotalPages(totalPages);
         } else {
-          console.error("Failed to fetch watch-later:", data.error || "Unknown error");
+          console.error(
+            "Failed to fetch watch-later:",
+            data.error || "Unknown error"
+          );
         }
       } catch (error) {
         console.error("Error fetching watch-later:", error);
